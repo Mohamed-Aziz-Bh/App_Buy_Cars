@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "974166174300",
+    "project_id": "fluttertp-6ec9f",
+    "storage_bucket": "fluttertp-6ec9f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974166174300:android:3b8d9e2b7dbc058335d499",
+        "android_client_info": {
+          "package_name": "com.example.Rent_Cars_App"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "974166174300-fk4bc8b2ceftuqvk5rjp5bclg4us58md.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlNbQmHCDIf-42bgFsYs7B9_T0VgN7Ijg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "974166174300-fk4bc8b2ceftuqvk5rjp5bclg4us58md.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "974166174300-p3d89gijchuroehskivcnea1sjvh965d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tp3App"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974166174300:android:2b76362797b2561a35d499",
+        "android_client_info": {
+          "package_name": "com.example.tp3_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "974166174300-shjfj04konn5tbqlsu8dmb3sssjtj03c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tp3_app",
+            "certificate_hash": "7981aa882b882fdf14cd40ffc4b3b9261ae3dd6e"
+          }
+        },
+        {
+          "client_id": "974166174300-fk4bc8b2ceftuqvk5rjp5bclg4us58md.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlNbQmHCDIf-42bgFsYs7B9_T0VgN7Ijg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "974166174300-fk4bc8b2ceftuqvk5rjp5bclg4us58md.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "974166174300-p3d89gijchuroehskivcnea1sjvh965d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tp3App"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
