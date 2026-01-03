@@ -27,7 +27,6 @@ class _OfferPageState extends State<OfferPage> {
     },
   ];
 
-  // Liste des chemins vers tes images locales
   final List<String> localImages = [
     'assets/offer1.jpg',
     'assets/offer2.jpg',

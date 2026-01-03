@@ -16,11 +16,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Rechercher des voitures"),
-        backgroundColor: Colors.deepPurple,
-        centerTitle: true,
-      ),
+      
       body: Column(
         children: [
           Padding(

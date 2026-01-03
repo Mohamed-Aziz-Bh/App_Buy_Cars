@@ -1,8 +1,11 @@
 import 'dart:ui';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rent_cars_app/homePage.dart';
 import 'package:rent_cars_app/searchPage.dart';
-import 'package:rent_cars_app/chatPage.dart'; 
+import 'package:rent_cars_app/chatPage.dart';
+import 'package:rent_cars_app/profilePage.dart';
+import 'package:rent_cars_app/login/login.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -18,11 +21,21 @@ class _HomeState extends State<Home> {
     HomePage(),
     SearchPage(),
     ChatPage(),
+    ProfilePage(),
   ];
 
   static const Color primaryColor = Color.fromRGBO(234, 218, 240, 1);
   static const Color iconActiveColor = Colors.deepPurple;
   static const Color iconInactiveColor = Colors.black54;
+
+  Future<void> _logout() async {
+  await FirebaseAuth.instance.signOut();
+  if (mounted) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => LoginPage()),
+    );
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -35,24 +48,21 @@ class _HomeState extends State<Home> {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset('assets/logo.png', height: 32),
+            Image.asset('assets/logo.png', height: 60),
             const SizedBox(width: 10),
-            const Text(
-              "Buy Cars",
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
-                letterSpacing: 1.1,
-              ),
-            ),
           ],
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications_none, color: Colors.black87),
+            icon: const Icon(Icons.notifications_none, color: Colors.deepPurple),
             onPressed: () {},
           ),
+          IconButton(
+            icon: const Icon(Icons.logout, color: Colors.deepPurple),
+            tooltip: "Se déconnecter",
+            onPressed: _logout,
+          ),
+          const SizedBox(width: 8),
         ],
       ),
 
@@ -110,6 +120,11 @@ class _HomeState extends State<Home> {
                     icon: Icon(Icons.chat_bubble_outline),
                     activeIcon: Icon(Icons.chat_bubble),
                     label: "Chat",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.person_outline),
+                    activeIcon: Icon(Icons.person),
+                    label: "Profile",
                   ),
                 ],
               ),
