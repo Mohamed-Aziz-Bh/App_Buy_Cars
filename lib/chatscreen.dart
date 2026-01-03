@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
 
-const String apiKey = 'AIzaSyAE3LXL2ICZZlIK_b84ijNHBN7EMLvfbTA'; 
+const String apiKey = 'VOTRE_CLE_API'; 
 
 class ChatScreen extends StatefulWidget {
   @override
