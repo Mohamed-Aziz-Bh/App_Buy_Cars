@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:rent_cars_app/theme/app_colors.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
 
-const String apiKey = 'VOTRE_CLE_API'; 
+const String apiKey = 'AIzaSyAE3LXL2ICZZlIK_b84ijNHBN7EMLvfbTA'; 
 
 class ChatScreen extends StatefulWidget {
+  final String? initialMessage;
+
+  ChatScreen({super.key, this.initialMessage});
+
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -14,6 +19,18 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _controller = TextEditingController();
   final List<Map<String, dynamic>> _messages = [];
   bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final msg = widget.initialMessage?.trim();
+    if (msg != null && msg.isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _controller.text = msg;
+        _sendMessage();
+      });
+    }
+  }
   
   String _selectedModel = 'gemini-2.5-flash';
   PlatformFile? _attachedFile;
@@ -132,14 +149,14 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         elevation: 1,
         backgroundColor: Colors.white,
         title: DropdownButtonHideUnderline(
           child: DropdownButton<String>(
             value: _selectedModel,
-            style: TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.bold),
+            style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold),
             items: _models.map((m) => DropdownMenuItem(value: m, child: Text(m))).toList(),
             onChanged: (val) => setState(() => _selectedModel = val!),
           ),
@@ -158,7 +175,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
 
-          if (_isLoading) LinearProgressIndicator(backgroundColor: Colors.transparent, valueColor: AlwaysStoppedAnimation(Colors.blueAccent)),
+          if (_isLoading) LinearProgressIndicator(backgroundColor: Colors.transparent, valueColor: AlwaysStoppedAnimation(AppColors.primary)),
 
           _buildInputArea(),
         ],
@@ -177,7 +194,7 @@ class _ChatScreenState extends State<ChatScreen> {
             Container(
               padding: EdgeInsets.all(8),
               margin: EdgeInsets.only(bottom: 4),
-              decoration: BoxDecoration(color: Colors.blue[50], borderRadius: BorderRadius.circular(8)),
+              decoration: BoxDecoration(color: AppColors.secondary, borderRadius: BorderRadius.circular(8)),
               child: Row(mainAxisSize: MainAxisSize.min, children: [Icon(Icons.attach_file, size: 16), Text(msg['fileName'])]),
             ),
           Container(
@@ -185,7 +202,7 @@ class _ChatScreenState extends State<ChatScreen> {
             margin: EdgeInsets.only(bottom: 12),
             constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
             decoration: BoxDecoration(
-              color: isUser ? Colors.blueAccent : Colors.white,
+              color: isUser ? AppColors.primary : Colors.white,
               borderRadius: BorderRadius.circular(16).copyWith(
                 bottomRight: isUser ? Radius.circular(0) : Radius.circular(16),
                 bottomLeft: isUser ? Radius.circular(16) : Radius.circular(0),
@@ -205,7 +222,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget _buildInputArea() {
     return Container(
       padding: EdgeInsets.all(12),
-      decoration: BoxDecoration(color: Colors.white, border: Border(top: BorderSide(color: Colors.grey[200]!))),
+      decoration: BoxDecoration(color: Colors.white, border: Border(top: BorderSide(color: AppColors.divider))),
       child: SafeArea(
         child: Column(
           children: [
@@ -214,7 +231,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Row(
                   children: [
-                    Icon(Icons.file_present, color: Colors.blueAccent),
+                    Icon(Icons.file_present, color: AppColors.primary),
                     SizedBox(width: 8),
                     Text(_attachedFile!.name, style: TextStyle(fontSize: 12)),
                     IconButton(icon: Icon(Icons.close, size: 16), onPressed: () => setState(() => _attachedFile = null)),
@@ -223,7 +240,7 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
             Row(
               children: [
-                IconButton(icon: Icon(Icons.add_circle_outline, color: Colors.blueAccent), onPressed: _pickFile),
+                IconButton(icon: Icon(Icons.add_circle_outline, color: AppColors.primary), onPressed: _pickFile),
                 Expanded(
                   child: TextField(
                     controller: _controller,
@@ -231,14 +248,14 @@ class _ChatScreenState extends State<ChatScreen> {
                       hintText: "Écrivez votre message...",
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(25), borderSide: BorderSide.none),
                       filled: true,
-                      fillColor: Colors.grey[100],
+                      fillColor: AppColors.secondary.withOpacity(0.4),
                       contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     ),
                   ),
                 ),
                 SizedBox(width: 8),
                 CircleAvatar(
-                  backgroundColor: Colors.blueAccent,
+                  backgroundColor: AppColors.primary,
                   child: IconButton(icon: Icon(Icons.send, color: Colors.white, size: 20), onPressed: _sendMessage),
                 ),
               ],

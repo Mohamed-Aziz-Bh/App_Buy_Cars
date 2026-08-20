@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:rent_cars_app/theme/app_colors.dart';
 
 class OfferPage extends StatefulWidget {
   const OfferPage({super.key});
@@ -22,7 +23,7 @@ class _OfferPageState extends State<OfferPage> {
       "subtitle": "Disponible maintenant",
     },
     {
-      "title": "Location Premium",
+      "title": "Vente Premium",
       "subtitle": "Confort & performance",
     },
   ];
@@ -47,8 +48,8 @@ class _OfferPageState extends State<OfferPage> {
                 borderRadius: BorderRadius.circular(18),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.15),
-                    blurRadius: 12,
+                    color: AppColors.primary.withOpacity(0.12),
+                    blurRadius: 16,
                     offset: const Offset(0, 6),
                   ),
                 ],
@@ -62,39 +63,44 @@ class _OfferPageState extends State<OfferPage> {
                       localImages[index],
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) =>
-                          const Center(child: Icon(Icons.error, color: Colors.red)),
+                          Container(
+                        color: AppColors.secondary,
+                        child: const Icon(Icons.local_offer,
+                            size: 48, color: AppColors.primary),
+                      ),
                     ),
                     Container(
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.bottomCenter,
                           end: Alignment.topCenter,
                           colors: [
-                            Colors.black87,
+                            Colors.black.withOpacity(0.75),
                             Colors.transparent,
                           ],
                         ),
                       ),
                     ),
                     Positioned(
-                      left: 16,
+                      left: 20,
                       bottom: 20,
+                      right: 20,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            offers[index]['title']!,
+                            offers[index]["title"]!,
                             style: const TextStyle(
                               color: Colors.white,
-                              fontSize: 20,
+                              fontSize: 22,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            offers[index]['subtitle']!,
-                            style: const TextStyle(
-                              color: Colors.white70,
+                            offers[index]["subtitle"]!,
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.9),
                               fontSize: 14,
                             ),
                           ),
@@ -107,42 +113,33 @@ class _OfferPageState extends State<OfferPage> {
             );
           },
           options: CarouselOptions(
-            height: 220,
-            viewportFraction: 0.75,
+            height: 180,
             autoPlay: true,
             enlargeCenterPage: true,
-            enlargeFactor: 0.25,
-            autoPlayInterval: const Duration(seconds: 4),
-            autoPlayAnimationDuration: const Duration(milliseconds: 900),
-            enableInfiniteScroll: true,
+            viewportFraction: 0.9,
             onPageChanged: (index, reason) {
-              setState(() {
-                _currentIndex = index;
-              });
+              setState(() => _currentIndex = index);
             },
           ),
         ),
-        const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(offers.length, (index) {
-            return GestureDetector(
-              onTap: () => _controller.animateToPage(index),
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                width: _currentIndex == index ? 14 : 8,
-                height: 8,
-                margin: const EdgeInsets.symmetric(horizontal: 4),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: _currentIndex == index
-                      ? Colors.black87
-                      : Colors.grey.shade400,
-                ),
+            return AnimatedContainer(
+              duration: const Duration(milliseconds: 250),
+              width: _currentIndex == index ? 20 : 8,
+              height: 8,
+              margin: const EdgeInsets.symmetric(horizontal: 3),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: _currentIndex == index
+                    ? AppColors.primary
+                    : AppColors.textHint.withOpacity(0.4),
               ),
             );
           }),
         ),
+        const SizedBox(height: 4),
       ],
     );
   }
